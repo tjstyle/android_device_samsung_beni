@@ -47,8 +47,32 @@ DEVICE_PACKAGE_OVERLAYS := device/samsung/beni/overlay
 
 # HAL libs and other system binaries
 PRODUCT_PACKAGES += \
-    make_ext4fs \
+    brcm_patchram_plus \
+    bdaddr_read \
+    copybit.beni \
+    gralloc.beni \
+    libOmxCore \
+    libOmxVidEnc \
+    rzscontrol \
     dexpreopt \
+    screencap
+
+# Samsung Specific Tools
+PRODUCT_PACKAGES += \
+    SamsungServiceMode
+
+# Filesystem management tools
+PRODUCT_PACKAGES += \
+    dump_image \
+    e2fsck \
+    erase_image \
+    flash_image \
+    make_ext4fs \
+    setup_fs
+
+# FM Radio
+PRODUCT_PACKAGES += \
+    FM
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
 	LOCAL_KERNEL := device/samsung/beni/kernel
@@ -80,6 +104,34 @@ PRODUCT_COPY_FILES += \
     device/samsung/beni/prebuilt/sec_param.ko:root/lib/modules/sec_param.ko \
     device/samsung/beni/BENI.rle:root/BENI.rle \
     device/samsung/beni/init.gt-s5670.rc:root/init.gt-s5670.rc
+
+## Wifi Stuff
+PRODUCT_COPY_FILES += \
+    device/samsung/beni/configs/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
+    device/samsung/beni/configs/hostapd.conf:system/etc/wifi/hostapd.conf \
+    device/samsung/beni/prebuilt/get_macaddrs:system/bin/get_macaddrs \
+    device/samsung/beni/configs/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf 
+
+## Media
+PRODUCT_COPY_FILES += \
+    device/samsung/beni/configs/AutoVolumeControl.txt:system/etc/AutoVolumeControl.txt \
+    device/samsung/beni/configs/AudioFilter.csv:system/etc/AudioFilter.csv \
+    device/samsung/beni/configs/media_profiles.xml:system/etc/media_profiles.xml \
+    device/samsung/beni/configs/vold.fstab:system/etc/vold.fstab 
+
+## Keymaps
+PRODUCT_COPY_FILES += \
+    device/samsung/beni/keys/sec_jack.kl:system/usr/keylayout/sec_jack.kl \
+    device/samsung/beni/keys/sec_touchscreen.kl:system/usr/keylayout/sec_touchscreen.kl \
+    device/samsung/beni/keys/sec_key.kl:system/usr/keylayout/sec_key.kl \
+    device/samsung/beni/keys/sec_key.kcm.bin:system/usr/keychars/sec_key.kcm.bin \
+    device/samsung/beni/keys/sec_touchscreen.kcm.bin:system/usr/keychars/sec_touchscreen.kcm.bin
+
+## Compcache
+PRODUCT_COPY_FILES += \
+    device/samsung/beni/prebuilt/lzo_compress.ko:root/lib/modules/lzo_compress.ko \
+    device/samsung/beni/prebuilt/lzo_decompress.ko:root/lib/modules/lzo_decompress.ko \
+    device/samsung/beni/prebuilt/ramzswap.ko:system/lib/modules/ramzswap.ko
 
 $(call inherit-product-if-exists, vendor/samsung/beni/beni-vendor.mk)
 
