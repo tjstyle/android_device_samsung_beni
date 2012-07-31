@@ -29,6 +29,20 @@ for different hardware and product builds. -->
 Turn off to use new Gingerbread animation -->
     <bool name="config_animateScreenLights">false</bool>
 
+    <!-- Vibrator pattern for feedback about touching a virtual key -->
+    <integer-array name="config_virtualKeyVibePattern">
+        <item>0</item>
+        <item>5</item>
+        <item>5</item>
+        <item>5</item>
+    </integer-array>
+
+    <!-- Vibrator pattern for feedback about on a key release -->
+    <integer-array name="config_virtualKeyUpPattern">
+        <item>5</item>
+        <item>5</item>
+    </integer-array>
+
     <integer-array name="config_autoBrightnessLevels">
         <item>200</item>
         <item>400</item>
